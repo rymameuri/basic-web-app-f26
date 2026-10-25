@@ -49,4 +49,10 @@ describe("QueryProcessor", () => {
     test('should compute large powers exactly', () => {
         expect(QueryProcessor("What is 84 to the power of 44?")).toBe("4658955761939521174403741608796631847916249549846044239037721357911228171641459572736");
     });
+
+    test('should respect operator precedence', () => {
+        expect(QueryProcessor("What is 95 multiplied by 14 plus 59?")).toBe("1389");
+        expect(QueryProcessor("What is 5 plus 3 multiplied by 2?")).toBe("11");
+        expect(QueryProcessor("What is 10 minus 4 minus 3?")).toBe("3");
+    });
 });

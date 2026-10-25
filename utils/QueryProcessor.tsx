@@ -31,12 +31,28 @@ export default function QueryProcessor(query: string): string {
       for (let i = 0; i < nums[0]; i++) [a, b] = [b, a + b];
       return String(a);
     }
-    if (nums.length >= 2) {
-      if (q.includes("plus")) return String(nums.reduce((x, y) => x + y, 0));
-      if (q.includes("minus")) return String(nums[0] - nums[1]);
-      if (q.includes("multiplied by") || q.includes("times"))
-        return String(nums.reduce((x, y) => x * y, 1));
-      if (q.includes("divided by")) return String(nums[0] / nums[1]);
+    const tokens = q.match(/-?\d+|plus|minus|multiplied by|times|divided by/g) || [];
+    if (tokens.length >= 3) {
+      // evaluate with usual precedence: * and / first, then + and -
+      const terms: number[] = [Number(tokens[0])];
+      const ops: string[] = [];
+      for (let i = 1; i + 1 < tokens.length; i += 2) {
+        const op = tokens[i];
+        const n = Number(tokens[i + 1]);
+        if (op === "multiplied by" || op === "times") {
+          terms[terms.length - 1] *= n;
+        } else if (op === "divided by") {
+          terms[terms.length - 1] /= n;
+        } else {
+          ops.push(op);
+          terms.push(n);
+        }
+      }
+      let total = terms[0];
+      ops.forEach((op, i) => {
+        total = op === "plus" ? total + terms[i + 1] : total - terms[i + 1];
+      });
+      return String(total);
     }
   }
 
