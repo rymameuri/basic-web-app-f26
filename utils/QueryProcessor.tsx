@@ -20,7 +20,11 @@ export default function QueryProcessor(query: string): string {
       };
       return nums.filter(isPrime).join(", ");
     }
-    if (q.includes("power")) return String(nums[0] ** nums[1]);
+    if (q.includes("power")) {
+      let result = BigInt(1);
+      for (let i = 0; i < nums[1]; i++) result = result * BigInt(nums[0]);
+      return result.toString();
+    }
     if (q.includes("fibonacci")) {
       let a = 0;
       let b = 1;

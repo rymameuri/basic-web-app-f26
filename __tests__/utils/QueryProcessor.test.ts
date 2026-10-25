@@ -45,4 +45,8 @@ describe("QueryProcessor", () => {
         expect(QueryProcessor("Which of the following numbers is both a square and a cube: 64, 50, 27?")).toBe("64");
         expect(QueryProcessor("What is 83 plus 13?")).toBe("96");
     });
+
+    test('should compute large powers exactly', () => {
+        expect(QueryProcessor("What is 84 to the power of 44?")).toBe("4658955761939521174403741608796631847916249549846044239037721357911228171641459572736");
+    });
 });
