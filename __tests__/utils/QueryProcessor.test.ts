@@ -68,4 +68,8 @@ describe("QueryProcessor", () => {
         expect(QueryProcessor("What is the scrabble score of zoo?")).toBe("12");
         expect(QueryProcessor("What is the scrabble score of quiz?")).toBe("22");
     });
+
+    test('should find anagrams', () => {
+        expect(QueryProcessor("Which of the following is an anagram of listen: banana, google, inlets, enlists?")).toBe("inlets");
+    });
 });

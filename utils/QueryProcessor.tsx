@@ -88,6 +88,17 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
+  const anagram = q.match(/anagram of\s+([a-z]+)\s*:\s*(.+?)\??$/);
+  if (anagram) {
+    const sorted = (w: string) => w.split("").sort().join("");
+    const target = sorted(anagram[1]);
+    return anagram[2]
+      .split(/\s*,\s*/)
+      .map((w) => w.trim())
+      .filter((w) => w !== anagram[1] && sorted(w) === target)
+      .join(", ");
+  }
+
   if (q.includes("eiffel")) return "Paris";
   if (q.includes("james bond") && q.includes("dr no")) return "Sean Connery";
   if (q.includes("banana")) return "yellow";
