@@ -1,6 +1,15 @@
 export default function QueryProcessor(query: string): string {
   const q = query.toLowerCase();
   const nums = (q.match(/-?\d+/g) || []).map(Number);
+  const ordinals = [
+    "first", "second", "third", "fourth", "fifth", "sixth", "seventh",
+    "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth",
+    "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth",
+    "nineteenth", "twentieth",
+  ];
+  ordinals.forEach((w, i) => {
+    if (q.includes(w + " number") && q.includes("fibonacci")) nums.unshift(i + 1);
+  });
 
   if (nums.length > 0) {
     if (q.includes("largest")) return String(Math.max(...nums));
@@ -63,6 +72,12 @@ export default function QueryProcessor(query: string): string {
       "writer in the English language and the world's pre-eminent dramatist."
     );
   }
+
+  if (q.includes("eiffel")) return "Paris";
+  if (q.includes("james bond") && q.includes("dr no")) return "Sean Connery";
+  if (q.includes("banana")) return "yellow";
+  if (q.includes("spain") && q.includes("euro")) return "peseta";
+  if (q.includes("theresa may")) return "2016";
 
   if (query.toLowerCase().includes("andrew id")) {
     return "rameuri";

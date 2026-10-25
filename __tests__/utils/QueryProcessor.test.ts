@@ -55,4 +55,12 @@ describe("QueryProcessor", () => {
         expect(QueryProcessor("What is 5 plus 3 multiplied by 2?")).toBe("11");
         expect(QueryProcessor("What is 10 minus 4 minus 3?")).toBe("3");
     });
+
+    test('should answer general knowledge and ordinal fibonacci', () => {
+        expect(QueryProcessor("Which city is the Eiffel tower in?")).toBe("Paris");
+        expect(QueryProcessor("Who played James Bond in the film Dr No?")).toBe("Sean Connery");
+        expect(QueryProcessor("What colour is a banana?")).toBe("yellow");
+        expect(QueryProcessor("What is the twelfth number in the Fibonacci sequence?")).toBe("144");
+        expect(QueryProcessor("What is the 10th number in the Fibonacci sequence?")).toBe("55");
+    });
 });
