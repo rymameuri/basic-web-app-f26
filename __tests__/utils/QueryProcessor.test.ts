@@ -31,4 +31,8 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe("rameuri");
     });
+
+    test('should add numbers', () => {
+        expect(QueryProcessor("What is 72 plus 64?")).toBe("136");
+    });
 });
