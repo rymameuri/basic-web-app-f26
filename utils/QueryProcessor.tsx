@@ -73,6 +73,21 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
+  const scrabble = q.match(/scrabble score of\s+([a-z]+)/);
+  if (scrabble) {
+    const points: { [letter: string]: number } = {};
+    const groups: [string, number][] = [
+      ["aeioulnstr", 1], ["dg", 2], ["bcmp", 3], ["fhvwy", 4],
+      ["k", 5], ["jx", 8], ["qz", 10],
+    ];
+    groups.forEach(([letters, value]) =>
+      letters.split("").forEach((l) => (points[l] = value))
+    );
+    return String(
+      scrabble[1].split("").reduce((sum, l) => sum + (points[l] || 0), 0)
+    );
+  }
+
   if (q.includes("eiffel")) return "Paris";
   if (q.includes("james bond") && q.includes("dr no")) return "Sean Connery";
   if (q.includes("banana")) return "yellow";

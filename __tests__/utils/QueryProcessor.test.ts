@@ -63,4 +63,9 @@ describe("QueryProcessor", () => {
         expect(QueryProcessor("What is the twelfth number in the Fibonacci sequence?")).toBe("144");
         expect(QueryProcessor("What is the 10th number in the Fibonacci sequence?")).toBe("55");
     });
+
+    test('should compute scrabble score', () => {
+        expect(QueryProcessor("What is the scrabble score of zoo?")).toBe("12");
+        expect(QueryProcessor("What is the scrabble score of quiz?")).toBe("22");
+    });
 });
